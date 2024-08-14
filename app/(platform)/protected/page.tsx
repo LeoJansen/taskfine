@@ -1,10 +1,11 @@
 import React from 'react'
-
+import { currentUser } from '@clerk/nextjs/server';
 
 const ProtectedPage =  async () => {
+  const user = await currentUser();
 
   return (
-    <div>Protected Page</div>
+    <div>User: {user?.firstName} </div>
   )
 }
 
