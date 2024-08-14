@@ -1,9 +1,11 @@
 import React from 'react'
 
-const ProtectedPage = () => {
+
+const ProtectedPage =  async () => {
+
   return (
     <div>Protected Page</div>
   )
 }
 
-export default ProtectedPage
+export default ProtectedPage; 
