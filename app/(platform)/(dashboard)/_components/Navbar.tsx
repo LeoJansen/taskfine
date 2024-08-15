@@ -1,6 +1,6 @@
 import Logo from '@/components/logo'
 import { Button } from '@/components/ui/button'
-import { OrganizationSwitcher } from '@clerk/nextjs'
+import { OrganizationSwitcher, UserButton } from '@clerk/nextjs'
 import { Plus } from 'lucide-react'
 
 export const Navbar = () => {
@@ -20,8 +20,22 @@ export const Navbar = () => {
             <div className='ml-auto flex items-center gap-x-2'>
                 <OrganizationSwitcher 
                 hidePersonal 
-                afterCreateOrganizationUrl='/organization/:id'
-                afterLeaveOrganizationUrl='/select-org'
+                afterCreateOrganizationUrl="/organization/:id"
+                afterLeaveOrganizationUrl="/select-org'"
+                afterSelectOrganizationUrl="/organization/:id"
+                appearance={{
+                    elements: {
+                        rootBox: {
+                            display: "flex",
+                            justifyContent:"center",
+                            alignItems:"center"
+                        }
+                    }
+                }}
+
+                />
+                <UserButton
+                afterSwitchSessionUrl="/"
 
                 />
             </div>
