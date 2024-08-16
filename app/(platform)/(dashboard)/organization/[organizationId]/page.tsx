@@ -6,9 +6,8 @@ const OrganizationIdPage = () => {
 
   return (
     <div>
-      <OrganizationSwitcher
-        hidePersonal
-      /></div>
+      Organization PAge
+      </div>
   )
 }
 
