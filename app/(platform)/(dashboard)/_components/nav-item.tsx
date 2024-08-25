@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Activity, CreditCard, Layout, Settings } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
+import { AccordionContent } from "@radix-ui/react-accordion";
+import { Button } from "@/components/ui/button";
 
 export type Organization = {
   id: string;
@@ -86,6 +88,22 @@ export const NavItem = ({
 
         </div>
       </AccordionTrigger>
+      <AccordionContent className="pt-1 text-neutral-700">
+        {routes.map((route) => (
+          <Button
+          key={route.href}
+          size="sm"
+          onClick={()=> onClick(route.href)}
+          className={cn("w-full font-normal justify-start pl-10 mb-1", 
+            pathname === route.href && "bg-sky-500[0.1] text-sky-700"
+          )}
+          variant="ghost"
+          >
+
+          </Button>
+        ))}
+
+      </AccordionContent>
     </AccordionItem>
   )
 }
