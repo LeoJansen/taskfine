@@ -99,6 +99,8 @@ export const NavItem = ({
           )}
           variant="ghost"
           >
+            {route.icon}
+            {route.label}
 
           </Button>
         ))}
