@@ -1,8 +1,12 @@
 "use client"
 
+import { Button } from "@/components/ui/button";
+import { SheetContent, Sheet } from "@/components/ui/sheet";
 import { useMobileSidebar } from "@/hooks/use-mobile-sidebar"
+import { Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Sidebar } from "./sidebar";
 
 export const MobileSidebar = ()=> {
     const pathname = usePathname();
@@ -16,14 +20,33 @@ export const MobileSidebar = ()=> {
         setIsMounted(true)
     }, []);
 
+    useEffect(() => {
+        onClose();
+
+    }, [pathname, onClose]);
+
     if (!isMounted) {
         return null;
     }
 
 
     return (
-        <div>
-            Mobile Sidebar
-        </div>
+      <>
+      <Button
+      onClick={onOpen}
+      className="block md:hidden"
+      variant="ghost"
+      size="sm"
+
+      >
+        <Menu className="h-4 w-4"/>
+        <Sheet>
+            <SheetContent>
+                <Sidebar storageKey="t-sidebar-mobile-state"/>
+
+            </SheetContent>
+        </Sheet>
+      </Button>
+            </>
     )
 }
