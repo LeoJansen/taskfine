@@ -1,7 +1,8 @@
 import { OrganizationProfile } from '@clerk/nextjs'
-import React from 'react'
+
 
 const SettingsPage = () => {
+
   return (
     <div className='w-full'>
         <OrganizationProfile
@@ -22,4 +23,4 @@ const SettingsPage = () => {
   )
 }
 
-export default SettingsPage
+export default SettingsPage;
