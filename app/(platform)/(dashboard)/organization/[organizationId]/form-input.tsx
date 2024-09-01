@@ -11,31 +11,31 @@ interface FormInputProps {
     }
 }
 
-export const FormInput = ({errors} : FormInputProps) => {
-    const {pending} = useFormStatus()
+export const FormInput = ({ errors }: FormInputProps) => {
+    const { pending } = useFormStatus()
 
 
     return (
         <div className="m-2">
             <Input
-            id="title"
-            name="title"
-            required
-            placeholder="Enter a board title"
-          
-            disabled={pending}
-        />
-             {errors?.title ? (
-                    <div>
-                        {errors.title.map((error: string) => (
-                            <p key={error} className="text-rose-500">
-                                {error}
-                            </p>
-                        ))}
-                    </div>
-                ) : null}
+                id="title"
+                name="title"
+                required
+                placeholder="Enter a board title"
+
+                disabled={pending}
+            />
+            {errors?.title ? (
+                <div>
+                    {errors.title.map((error: string) => (
+                        <p key={error} className="text-rose-500">
+                            {error}
+                        </p>
+                    ))}
+                </div>
+            ) : null}
 
         </div>
-     
+
     );
 };
