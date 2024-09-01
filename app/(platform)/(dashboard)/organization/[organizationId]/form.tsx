@@ -4,6 +4,7 @@ import { create } from "@/actions/createBoard"
 import { Button } from "@/components/ui/button"
 import { useActionState } from "react"
 import { useFormState } from "react-dom"
+import { FormInput } from "./form-input"
 
 
 export const Form = () => {
@@ -14,26 +15,8 @@ export const Form = () => {
     return (
         <form action={dispatch}>
             <div className="flex flex-col space-y-2">
-                <input
-                    id="title"
-                    name="title"
-                    required
-                    placeholder="Enter a board title"
-                    className="border border-black p-1"
-                />
-                {state?.errors?.title ? (
-                    <div>
-                        {state.errors.title.map((error: string) => (
-                            <p key={error} className="text-rose-500">
-                                {error}
-
-                            </p>
-                        ))}
-                    </div>
-                ) : null}
-
+             <FormInput errors={state?.errors}/>
             </div>
-
             <Button type="submit">
                 Submit
             </Button>
