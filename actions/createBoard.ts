@@ -1,12 +1,25 @@
-async function create(formData:FormData) {
-    "use server"
+"use server"
 
-    const title = formData.get("title") as string;
+import { db } from '@/lib/db';
+import { revalidatePath } from 'next/cache';
+import { z } from "zod";
 
-    await db.board.create({
-      data: {
-        title
-      }
-    })
-    
-  }
+const CreateBoard = z.object({
+  title: z.string(),
+})
+
+
+export async function create(formData: FormData) {
+  const {title} = CreateBoard.parse({
+    title: formData.get("title")
+  })
+
+  await db.board.create({
+    data: {
+      title
+    }
+  })
+  revalidatePath("/organization/org_2khula2udZnj9kMut5KLe4ERVzu")
+}
+
+
