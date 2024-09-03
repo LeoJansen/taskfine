@@ -5,6 +5,7 @@ import { useFormStatus } from "react-dom";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { cn } from "@/lib/utils";
+import { FormErrors } from "./form-errors";
 
 interface FormInputProps {
     id: string;
@@ -56,8 +57,11 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(({
                     className={cn("text-sm px-2  py-1 h-7", className)}
                     aria-describedby={`${id}-error`}
                 />
-
             </div>
+            <FormErrors
+                id={id}
+                errors={errors}
+            />
 
         </div>
     )
