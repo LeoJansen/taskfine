@@ -27,8 +27,9 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       }
     });
   } catch(error){
+    console.log("error returned")
       return {
-        error: "Failed to create. actions/indext.ts"
+        error: "Failed to create."
       }
   }
 
