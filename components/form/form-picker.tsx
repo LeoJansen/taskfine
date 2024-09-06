@@ -9,6 +9,7 @@ import { useFormStatus } from "react-dom";
 
 import { defaultImages } from "@/constants/images";
 import Link from "next/link";
+import { FormErrors } from "./form-errors";
 
 interface FormPickerProps {
     id: string;
@@ -76,6 +77,15 @@ export const FormPicker = ({
                             console.log(selectedImageId + " Selec")
                         }}
                     >
+                        <input
+                            type="radio"
+                            id={id}
+                            name={id}
+                            className="hidden"
+                            checked={selectedImageId === image.id}
+                            disabled={pending}
+                            value={`${image.id} | ${image.urls.thumb} | ${image.urls.full} | ${image.links.html} | ${image.user.name}`}
+                        />
 
                         <Image
                             src={image.urls.thumb}
@@ -91,7 +101,6 @@ export const FormPicker = ({
                         <Link href={image.links.html}
                             target="_blank"
                             className="opacity-0 group-hover:opacity-100 absolute bottom-0 w-full text-[10px] truncate text-white hover:underline p-1 bg-black/10"
-
                         >
                             {image.user.name}
 
@@ -100,7 +109,9 @@ export const FormPicker = ({
                 ))}
 
             </div>
-
+            <FormErrors
+                id="image"
+                errors={errors} />
         </div>
     );
 };
