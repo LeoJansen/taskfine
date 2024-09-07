@@ -58,8 +58,6 @@ export const FormPicker = ({
             <div className="p-6 flex items-center justify-center">
                 <Loader2 className="h-6 w-6 text-sky-700 animate-spin" />
             </div>
-
-
         )
 
     }
@@ -74,13 +72,12 @@ export const FormPicker = ({
                         onClick={() => {
                             if (pending) return;
                             setSelectedImageId(image.id);
-                            console.log(selectedImageId + " Selec")
                         }}
                     >
                         <input
                             type="radio"
                             id={id}
-                            name={id}
+                            name={id}                     
                             className="hidden"
                             checked={selectedImageId === image.id}
                             disabled={pending}
