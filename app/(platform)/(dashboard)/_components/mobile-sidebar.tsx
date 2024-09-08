@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
-import { SheetContent, Sheet } from "@/components/ui/sheet";
+import { SheetContent, Sheet, SheetClose } from "@/components/ui/sheet";
 import { useMobileSidebar } from "@/hooks/use-mobile-sidebar"
 import { Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -39,11 +39,13 @@ export const MobileSidebar = () => {
                 size="sm"
             >
                 <Menu className="h-4 w-4" />
-                <Sheet open={isOpen} onOpenChange={onClose}>
+                <Sheet open={isOpen} onOpenChange={onClose} >
+                
                     <SheetContent
                         side="left"
                         className="p-2 pt-10"
                     >
+                        
                         <Sidebar
                             storageKey="t-sidebar-mobile-state"
 

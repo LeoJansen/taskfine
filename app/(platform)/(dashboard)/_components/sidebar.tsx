@@ -17,19 +17,18 @@ interface SidebarProps {
 
 
 export const Sidebar = ({
-
   storageKey = "t-sidebar-state"
-
 }: SidebarProps) => {
 
   const [expanded, setExpanded] = useLocalStorage<Record<string, any>>(storageKey, {})
-  const [loading, setLoading] = useState(true)
+ 
 
 
   const {
     organization: activeOrganization,
     isLoaded: isLoadedOrg
-  } = useOrganization()
+  } = useOrganization();
+
   const {
     userMemberships,
     isLoaded: isLoadedOrgList
@@ -37,7 +36,7 @@ export const Sidebar = ({
     userMemberships: {
       infinite: true,
     }
-  })
+  });
   const defaultAccordionValue: string[] = Object.keys(expanded)
     .reduce((acc: string[], key: string) => {
       if (expanded[key]) {
@@ -52,16 +51,10 @@ export const Sidebar = ({
       [id]: !expanded[id],
     }));
   };
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1100);
 
 
-  }, [])
 
-
-  if (!isLoadedOrg || !isLoadedOrgList || userMemberships.isLoading || loading) {
+  if (!isLoadedOrg || !isLoadedOrgList || userMemberships.isLoading ) {
     return (
       <>
         <div className='flex items-center justify-between mb-2'>
