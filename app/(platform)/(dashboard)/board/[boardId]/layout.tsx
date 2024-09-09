@@ -2,6 +2,7 @@ import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { notFound, redirect } from "next/navigation";
 import { title } from "process";
+import { BoardNavbar } from "./_components/board-navbar";
 
 export async function generateMetadata({
     params
@@ -9,6 +10,7 @@ export async function generateMetadata({
     params: { boardId: string };
 }) {
     const {orgId} = auth();
+    
 
     if(!orgId) {
         return{
@@ -37,6 +39,7 @@ const BoardIdLayout = async ({
     params: { boardId: string }
 }) => {
     const { orgId } = auth();
+    
 
     if (!orgId) {
         redirect("/select-org");
@@ -57,7 +60,8 @@ const BoardIdLayout = async ({
         <div className="relative h-full bg-no-repeat bg-cover bg-center"
             style={{ backgroundImage: `url(${board?.imageFullUrl})` }}
         >
-            <BoardNavbar/>
+            <BoardNavbar id={params.boardId} orgId={orgId} />
+            <div className="absolute inset-0 bg-black/40"/>
             <main className="relative pt-28 h-full">
                 {children}
             </main>
