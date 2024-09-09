@@ -1,21 +1,15 @@
 import { db } from "@/lib/db";
+import { Board } from "@prisma/client";
 
 interface BoardNavbarProps {
-    id: string;
-    orgId: string;
+   data: Board;
 }
 
 export const BoardNavbar = async ({
-    id,
-    orgId
+   data
 }: BoardNavbarProps) => {
 
-    const board = await db.board.findUnique({
-        where: {
-            id: id,
-            orgId,
-        }
-    });
+   
 
     return (
         <div className="w-full h-14 z-[40] bg-black/50 fixed top-14 flex items-center">
