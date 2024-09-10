@@ -5,11 +5,16 @@ import { Button } from "@/components/ui/button";
 
 import { Popover, PopoverTrigger, PopoverContent, PopoverClose } from "@radix-ui/react-popover";
 import { MoreHorizontal, X } from "lucide-react";
+
 interface BoardOptionsProps {
     id: string;
 }
 
 export const BoardOptions = ({ id }) => {
+
+    const onDelete = () => {
+
+    }
 
     return (
         <Popover>
@@ -19,24 +24,28 @@ export const BoardOptions = ({ id }) => {
                 </Button>
             </PopoverTrigger>
             <PopoverContent
-                className="px-0 pt-3 pb-3"
+                className="px-4 pt-3 pb-3 bg-neutral-100 border border-neutral-500 rounded-md"
                 side="bottom"
                 align="start"
             >
-                <div className="text-sm font-medium text-center text-neutral-600 pb-4">
+                <div className="text-sm font-medium text-center text-neutral-600 pb-4 mr-8">
                     Board Actions
                 </div>
                 <PopoverClose asChild>
                     <Button
                         variant="ghost"
-                        className="w-auto h-auto p-2 absolute top-2 right-2 text-neutral-600"
+                        className="absolute right-2 top-2 h-auto w-auto p-2 text-neutral-600"
                     >
-
                         <X className="h-4 w-4" />
-
                     </Button>
-
                 </PopoverClose>
+                <Button
+                variant="ghost"
+                onClick={onDelete}
+                className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm text-neutral-600"
+                >
+                    Delete this board
+                </Button>
             </PopoverContent>
 
         </Popover>
