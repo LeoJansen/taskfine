@@ -2,19 +2,28 @@
 
 
 import { Button } from "@/components/ui/button";
-
 import { Popover, PopoverTrigger, PopoverContent, PopoverClose } from "@radix-ui/react-popover";
 import { MoreHorizontal, X } from "lucide-react";
+import { deleteBoard } from "@/actions/delete-board";
+import { useAction } from "@/hooks/use-action";
+import { toast } from "sonner";
 
 interface BoardOptionsProps {
     id: string;
 }
 
 export const BoardOptions = ({ id }) => {
+    const { execute, isLoading } = useAction(deleteBoard, {
+        onError: (error) => {
+            toast.error(error)
+        },
+    });
+
 
     const onDelete = () => {
+        execute({ id });
 
-    }
+    };
 
     return (
         <Popover>
@@ -40,9 +49,10 @@ export const BoardOptions = ({ id }) => {
                     </Button>
                 </PopoverClose>
                 <Button
-                variant="ghost"
-                onClick={onDelete}
-                className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm text-neutral-600"
+                    variant="ghost"
+                    onClick={onDelete}
+                    disabled={isLoading}
+                    className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm text-neutral-600"
                 >
                     Delete this board
                 </Button>
