@@ -4,6 +4,9 @@ import { FormInput } from "@/components/form/form-input";
 import { Button } from "@/components/ui/button"
 import { Board } from "@prisma/client"
 import { ElementRef, useRef, useState } from "react";
+import { useAction } from "@/hooks/use-action";
+import { updateBoard } from "@/actions/update-board";
+import { toast } from "sonner";
 
 interface BoardTitleFormProps {
     data: Board;
@@ -14,9 +17,23 @@ interface BoardTitleFormProps {
 export const BoardTitleForm = ({
     data
 }: BoardTitleFormProps) => {
+
+
     const formRef = useRef<ElementRef<"form">>(null);
     const inputRef = useRef<ElementRef<"input">>(null);
+    const [title, setTitle] = useState(data.title);
     const [isEditing, setIsEditing] = useState(false);
+
+    const {execute} = useAction(updateBoard, {
+        onSuccess: (data) => {
+            toast.success(`Board "${data.title}" updated!`);
+            setTitle(data.title);
+            disableEditing();
+        },
+        onError: () => {
+
+        }
+    })
 
     const enableEditing = () => {
         setTimeout(() => {
@@ -33,9 +50,11 @@ export const BoardTitleForm = ({
 
     const onSubmit = (formData: FormData) =>{
         const title = formData.get("title") as string;
-        console.log("I am submitted");
-        console.log(title);
-    }
+        execute({
+            title,
+            id: data.id,
+        });
+    };
 
     const onBlur = () => {
         formRef.current?.requestSubmit();
@@ -48,7 +67,7 @@ export const BoardTitleForm = ({
                 ref={inputRef}
                 id="title"
                 onBlur={onBlur}
-                defaultValue={data.title}
+                defaultValue={title}
                 className="text-lg font-bold px-[7px] py-1 h-7 bg-transparent focus-visible:outline-none focus-visible:ring-transparent border-none"
                 />
 
@@ -63,7 +82,7 @@ export const BoardTitleForm = ({
             variant="transparent"
            
         >
-            {data.title}
+            {title}
         </Button>
     )
 }
