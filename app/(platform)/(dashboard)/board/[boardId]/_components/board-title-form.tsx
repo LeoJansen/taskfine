@@ -30,7 +30,8 @@ export const BoardTitleForm = ({
             setTitle(data.title);
             disableEditing();
         },
-        onError: () => {
+        onError: (error) => {
+            toast.error(error);
 
         }
     })
