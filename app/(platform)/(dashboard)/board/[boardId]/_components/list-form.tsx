@@ -1,9 +1,11 @@
-import { Plus } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { ListWrapper } from "./list-wrapper";
 import { useState, useRef, ElementRef } from "react";
 import { useEventListener, useOnClickOutside } from "usehooks-ts";
 import { FormInput } from "@/components/form/form-input";
 import { useParams } from "next/navigation";
+import { FormSubmit } from "@/components/form/form-button";
+import { Button } from "@/components/ui/button";
 
 export const ListForm = () => {
     const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -49,6 +51,22 @@ export const ListForm = () => {
                     value={params.boardId}
                     name="boardId"
                     />
+                    <div className="flex items-center justify-between gap-x-1">
+                    <FormSubmit
+                    >
+                        Add list
+                    </FormSubmit>
+                    <Button onClick={disableEditing}
+                    size="sm"
+                    variant="ghost"
+                    >
+                <X className="h-5 w-5 text-neutral-500"/>
+
+                    </Button>
+
+                    </div>
+                   
+
 
                 </form>
             </ListWrapper>

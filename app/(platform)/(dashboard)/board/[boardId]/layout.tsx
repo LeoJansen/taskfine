@@ -3,6 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import { notFound, redirect } from "next/navigation";
 import { title } from "process";
 import { BoardNavbar } from "./_components/board-navbar";
+import { Loader2 } from "lucide-react";
 
 export async function generateMetadata({
     params
@@ -39,11 +40,14 @@ const BoardIdLayout = async ({
     params: { boardId: string }
 }) => {
     const { orgId } = auth();
-    
+ 
 
     if (!orgId) {
         redirect("/select-org");
     };
+    setTimeout(() => {
+        
+    }, 10000);
 
     const board = await db.board.findUnique({
         where: {
@@ -55,6 +59,14 @@ const BoardIdLayout = async ({
     if (!orgId) {
         notFound();
     };
+    if(!board) {
+        return (
+            <div className="p-6 flex items-center justify-center">
+            <Loader2 className="h-6 w-6 text-sky-700 animate-spin" />
+        </div>
+        )
+    }
+    
 
     return (
         <div className="relative h-full bg-no-repeat bg-cover bg-center"
