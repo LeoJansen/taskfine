@@ -19,22 +19,44 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     let list;
 
     try {
+        const board = await db.board.findUnique({
+            where: {
+                id: boardId,
+                orgId
+            },
+        });
+
+        if(!board){
+            return {
+                error:"Board not found",
+            };
+        };
+
+
+        const lastList = await db.list.findFirst({
+            where: {boardId},
+            orderBy: {order: "desc"},
+            select: {order: true}
+        })
+
+        const newOrder = lastList ? lastList.order + 1 : 1;
+
         list= await db.list.create({
          data: {
             title,
             boardId,
-            order:1
+            order: newOrder
          }
        
         });
         
     } catch (error) {
         return {
-            error: "Failed to update"
+            error: "Failed to create"
         }   
     };
-    revalidatePath(`/board/${id}`)
-    return { data: board};
+    revalidatePath(`/board/${boardId}`)
+    return { data: list};
 
 };
 
