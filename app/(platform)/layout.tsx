@@ -9,7 +9,7 @@ const PlatformLayout = ({
     return (
     
             <ClerkProvider>
-                <Toaster/>
+                <Toaster />
             {children}
             </ClerkProvider>
 
