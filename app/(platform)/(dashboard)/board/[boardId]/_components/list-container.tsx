@@ -3,6 +3,7 @@
 import { ListWithCards } from "@/types";
 import { ListForm } from "./list-form";
 import { useEffect, useState } from "react";
+import { ListItem } from "./list-item";
 
 
 
@@ -24,15 +25,15 @@ export const ListContainer = ({
 
 
     return (
-        <ol>
+        <ol className="flex gap-x-3 h-full">
             {orderedData.map((list, index) => {
                 return (
-              /*   <ListItem
+                <ListItem
                 key={list.id}
                 index={index}
                 data={list}
 
-                /> */
+                />
             )
             })}
 
