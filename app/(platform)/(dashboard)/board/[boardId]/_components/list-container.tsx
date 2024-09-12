@@ -33,9 +33,29 @@ export const ListContainer = ({
         setOrderedData(data);
     }, [data]);
 
-    const onDragEnd = () => {
+    const onDragEnd = (result: any) => {
+        const { destination, source, type } = result;
 
-    }
+        if (!destination) {
+            return;
+        };
+
+        //if dropped in the same position
+
+        if (
+            destination.droppableId === source.droppableId &&
+            destination.index === source.index
+        ) {
+            return;
+        };
+
+        //User moves a list
+
+        if (type === "list") {
+            const items = reorder(orderedData, source.index, destination.index).map((item, index) => ({ ...item, order: index }));
+            setOrderedData(items);
+        };
+    };
 
 
     return (
