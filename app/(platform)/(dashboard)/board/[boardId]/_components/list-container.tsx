@@ -4,7 +4,10 @@ import { ListWithCards } from "@/types";
 import { ListForm } from "./list-form";
 import { useEffect, useState } from "react";
 import { ListItem } from "./list-item";
-
+import {
+    DragDropContext,
+    Droppable
+} from '@hello-pangea/dnd';
 
 
 interface ListContainerProps {
@@ -25,14 +28,14 @@ export const ListContainer = ({
 
 
     return (
-        <ol className="flex gap-x-3 h-full">
+        <DragDropContext onDragEnd={() => {}}>
+     <ol className="flex gap-x-3 h-full">
             {orderedData.map((list, index) => {
                 return (
                 <ListItem
                 key={list.id}
                 index={index}
                 data={list}
-
                 />
             )
             })}
@@ -40,5 +43,7 @@ export const ListContainer = ({
             <ListForm />
             <div className="flex-shrink-0 w-1" />
         </ol>
+        </DragDropContext>
+   
     );
 };
