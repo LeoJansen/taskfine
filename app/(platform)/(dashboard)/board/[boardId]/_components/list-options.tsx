@@ -41,7 +41,7 @@ export const ListOptions = ({
         }
     });
 
-    const { execute: executeCopy, fieldErrors } = useAction(copyList, {
+    const { execute: executeCopy } = useAction(copyList, {
         onSuccess: (data) => {
             toast.success(`List "${data.title}" copied`);
             closeRef.current?.click();
@@ -57,6 +57,12 @@ export const ListOptions = ({
         const id = formData.get("id") as string;
         const boardId = formData.get("boardId") as string;
         executeDelete({ id, boardId });
+    };
+
+    const onCopy = (formData: FormData) => {
+        const id = formData.get("id") as string;
+        const boardId = formData.get("boardId") as string;
+        executeCopy({ id, boardId });
     };
 
 
@@ -79,7 +85,7 @@ export const ListOptions = ({
                 <Button onClick={onAddCard} className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm" variant="ghost">
                     Add Card
                 </Button>
-                <form >
+                <form action={onCopy}>
                     <input hidden name="id" id="id" value={data.id} />
                     <input hidden name="boardId" id="boardId" value={data.boardId} />
                     <FormSubmit
