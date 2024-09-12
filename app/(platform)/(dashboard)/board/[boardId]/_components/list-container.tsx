@@ -41,7 +41,6 @@ export const ListContainer = ({
         };
 
         //if dropped in the same position
-
         if (
             destination.droppableId === source.droppableId &&
             destination.index === source.index
@@ -50,11 +49,29 @@ export const ListContainer = ({
         };
 
         //User moves a list
-
         if (type === "list") {
             const items = reorder(orderedData, source.index, destination.index).map((item, index) => ({ ...item, order: index }));
             setOrderedData(items);
         };
+
+        //User moves a card
+        if (type === "card") {
+            let newOrderedData = [...orderedData];
+
+            //Sourcer and destination list
+            const sourceList = newOrderedData.find(list => list.id === source.droppableId);
+            const destList = newOrderedData.find(list => list.id === destination.droppableId);
+            
+
+        };
+
+
+
+
+
+
+
+
     };
 
 
