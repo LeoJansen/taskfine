@@ -15,6 +15,7 @@ import { useAction } from "@/hooks/use-action";
 
 import { createCard } from "@/actions/create-card";
 import { useEventListener, useOnClickOutside } from "usehooks-ts";
+import { toast } from "sonner";
 
 
 interface CardFormProps {
@@ -33,7 +34,15 @@ export const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(({
 
     const params = useParams();
     const formRef = useRef<ElementRef<"form">>(null);
-    const { execute, fieldErrors } = useAction(createCard);
+    const { execute, fieldErrors } = useAction(createCard, {
+        onSuccess: (data) => {
+            toast.success(`Card ${data.title} created`);
+            formRef.current?.reset();
+        },
+        onError: (error) => {
+            toast.error(error);
+        }
+    });
 
     const onKeyDown = (e: KeyboardEvent) => {
         if (e.key === "Escape") {
@@ -54,9 +63,9 @@ export const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(({
     const onSubmit = (formData: FormData) => {
         const title = formData.get("title") as string;
         const listId = formData.get("listId") as string;
-        const boardId = formData.get("boardId") as string;
-
-        execute({title, listId, boardId});
+        const boardId = params.boardId as string;
+        console.log(({ title, listId, boardId }))
+        execute({ title, listId, boardId });
 
     };
 
@@ -64,6 +73,8 @@ export const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(({
     if (isEditing) {
         return (
             <form
+                ref={formRef}
+                action={onSubmit}
                 className="m-1 py-0.5 px-1 space-y-4"
             >
                 <FormTextarea

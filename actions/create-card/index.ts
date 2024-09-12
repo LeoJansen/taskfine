@@ -42,7 +42,8 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         });
 
         const newOrder = lastCard ? lastCard.order + 1 : 1;
-
+        
+        console.log(({title, listId, boardId}))
         card = await db.card.create({
             data: {
                 title,
