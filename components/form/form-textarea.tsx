@@ -32,8 +32,17 @@ export const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextareaProps>((
 } : FormTextareaProps) => {
 
     return (
-        <div>
-            
+        <div className="space-y-2 w-full"> 
+        {label ? (
+            <Label
+            htmlFor={id}
+            className="text-xs font-semibold text-neutral-700"
+            >
+
+            </Label>
+
+        ) : null}
+
         </div>
     )
 })
