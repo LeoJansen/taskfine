@@ -5,6 +5,7 @@ import { ListHeader } from "./list-header";
 import { ElementRef, useRef, useState } from "react";
 import { CardForm } from "./card-form";
 import { cn } from "@/lib/utils";
+import { CardItem } from "./card-item";
 
 
 interface ListItemProps {
@@ -41,7 +42,9 @@ export const ListItem = ({
                     {data.cards.map((card,index) => (
                         <CardItem
                         index={index}
-                        
+                        key={card.id}
+                        data={card}
+
                         />
                     ))}
 
