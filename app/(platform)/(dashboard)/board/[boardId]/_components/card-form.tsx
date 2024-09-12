@@ -14,6 +14,7 @@ import { useParams } from "next/navigation";
 import { useAction } from "@/hooks/use-action";
 
 import { createCard } from "@/actions/create-card";
+import { useEventListener, useOnClickOutside } from "usehooks-ts";
 
 
 interface CardFormProps {
@@ -29,11 +30,28 @@ export const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(({
     enableEditing,
     disableEditing
 }: CardFormProps, ref) => {
+
     const params = useParams();
     const formRef = useRef<ElementRef<"form">>(null);
-    const { execute, fieldErrors } = useAction(createCard, {
+    const { execute, fieldErrors } = useAction(createCard);
 
-    })
+    const onKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+            disableEditing();
+        };
+    };
+
+    useOnClickOutside(formRef, disableEditing);
+    useEventListener("keydown", onKeyDown);
+
+    const onTextareakeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            formRef.current?.requestSubmit()
+
+        }
+    }
+
 
     if (isEditing) {
         return (
