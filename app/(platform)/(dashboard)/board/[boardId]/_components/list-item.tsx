@@ -47,6 +47,8 @@ export const ListItem = ({
                         <Droppable droppableId={data.id} type="card">
                             {(provided) => (
                                 <ol
+                                    {...provided.droppableProps}
+                                    ref={provided.innerRef}
                                     className={cn("mx-1 px-1 py-0.5 flex flex-col gap-y-2", data.cards.length > 0 ? "mt-2" : "mt-0")}
                                 >
                                     {data.cards.map((card, index) => (
@@ -56,6 +58,7 @@ export const ListItem = ({
                                             data={card}
                                         />
                                     ))}
+                                    {provided.placeholder}
                                 </ol>
                             )}
                         </Droppable>
