@@ -1,10 +1,20 @@
 "use client"
+import {
+    forwardRef,
+    useRef,
+    ElementRef,
+    KeyboardEventHandler
+} from "react";
 
 import { FormSubmit } from "@/components/form/form-button";
 import { FormTextarea } from "@/components/form/form-textarea";
 import { Button } from "@/components/ui/button";
 import { Plus, X } from "lucide-react";
-import { forwardRef } from "react";
+import { useParams } from "next/navigation";
+import { useAction } from "@/hooks/use-action";
+
+import { createCard } from "@/actions/create-card";
+
 
 interface CardFormProps {
     listId: string;
@@ -19,6 +29,11 @@ export const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(({
     enableEditing,
     disableEditing
 }: CardFormProps, ref) => {
+    const params = useParams();
+    const formRef = useRef<ElementRef<"form">>(null);
+    const { execute, fieldErrors } = useAction(createCard, {
+
+    })
 
     if (isEditing) {
         return (
