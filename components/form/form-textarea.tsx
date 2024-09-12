@@ -34,7 +34,7 @@ export const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextareaProps>((
     onClick,
     onKeyDown,
     defaultValue
-}: FormTextareaProps) => {
+}: FormTextareaProps, ref) => {
     const { pending } = useFormStatus();
 
     return (
@@ -52,6 +52,7 @@ export const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextareaProps>((
                 ) : null}
                 <Textarea
                     id={id}
+                    ref={ref}
                     placeholder={placeholder}
                     required={required}
                     disabled={disabled || pending}
