@@ -35,8 +35,14 @@ const handler = async (data: InputType): Promise<ReturnType> => {
                 },
             })
         );
+        console.log("Before \n")
+        console.log(transaction);
 
         updatedCards = await db.$transaction(transaction);
+
+        console.log("After \n")
+        console.log(transaction);
+        console.log(updatedCards)
 
 
 
