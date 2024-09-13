@@ -8,6 +8,9 @@ import {
     DragDropContext,
     Droppable
 } from '@hello-pangea/dnd';
+import { useAction } from "@/hooks/use-action";
+import { updateListOrder } from "@/actions/update-list-order";
+import { toast } from "sonner";
 
 
 interface ListContainerProps {
@@ -28,6 +31,14 @@ export const ListContainer = ({
     boardId
 }: ListContainerProps) => {
     const [orderedData, setOrderedData] = useState(data)
+    const {execute: executeUpdateListOrder} = useAction(updateListOrder, {
+        onSuccess: (data) => {
+            toast.success(`Lists updated`)
+        },
+        onError: (error) => {
+            toast.error(error);
+        }
+    });
 
     useEffect(() => {
         setOrderedData(data);
