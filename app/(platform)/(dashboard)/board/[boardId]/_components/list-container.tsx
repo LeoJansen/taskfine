@@ -30,9 +30,9 @@ export const ListContainer = ({
     data,
     boardId
 }: ListContainerProps) => {
-    const [orderedData, setOrderedData] = useState(data)
-    const {execute: executeUpdateListOrder} = useAction(updateListOrder, {
-        onSuccess: (data) => {
+    const [orderedData, setOrderedData] = useState(data);
+    const { execute: executeUpdateListOrder } = useAction(updateListOrder, {
+        onSuccess: () => {
             toast.success(`Lists updated`)
         },
         onError: (error) => {
@@ -65,6 +65,7 @@ export const ListContainer = ({
         if (type === "list") {
             const items = reorder(orderedData, source.index, destination.index).map((item, index) => ({ ...item, order: index }));
             setOrderedData(items);
+            executeUpdateListOrder({ items, boardId });
         };
 
         //User moves a card
