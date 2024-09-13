@@ -11,6 +11,7 @@ import {
 import { useAction } from "@/hooks/use-action";
 import { updateListOrder } from "@/actions/update-list-order";
 import { toast } from "sonner";
+import { updateCardOrder } from "@/actions/update-card-order";
 
 
 interface ListContainerProps {
@@ -33,7 +34,15 @@ export const ListContainer = ({
     const [orderedData, setOrderedData] = useState(data);
     const { execute: executeUpdateListOrder } = useAction(updateListOrder, {
         onSuccess: () => {
-            toast.success(`Lists updated`)
+            toast.success(`Lists reordered`)
+        },
+        onError: (error) => {
+            toast.error(error);
+        }
+    });
+    const {execute: executeUpdateCardOrder} = useAction(updateCardOrder, {
+        onSuccess: () => {
+            toast.success(`Cards reordered`)
         },
         onError: (error) => {
             toast.error(error);
@@ -99,6 +108,7 @@ export const ListContainer = ({
                 });
 
                 sourceList.cards = reorderedCards;
+                executeUpdateCardOrder({boardId, items: reorderedCards})
                 //setOrderedData(newOrderedData)
 
 
