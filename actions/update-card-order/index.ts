@@ -34,7 +34,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
                     listId: card.listId
                 },
             })
-        );
+        );                                                                                                                                                                                                                                                                                                  =
         console.log("Before \n")
         console.log(transaction);
 
