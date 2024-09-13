@@ -20,4 +20,5 @@ export const CardModal = () => {
             </DialogContent>
 
         </Dialog>
+    )
 }
