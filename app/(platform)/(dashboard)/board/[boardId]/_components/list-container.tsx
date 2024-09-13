@@ -111,11 +111,6 @@ export const ListContainer = ({
                 executeUpdateCardOrder({boardId, items: reorderedCards})
                 //setOrderedData(newOrderedData)
 
-
-
-
-
-
             }
 
             //User moves the card to another list
@@ -140,6 +135,10 @@ export const ListContainer = ({
                 });
 
                 //setOrderedData(newOrderedData)
+                executeUpdateCardOrder({
+                    boardId, 
+                    items: destList.cards,
+                })
 
 
 
