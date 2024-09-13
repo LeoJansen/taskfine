@@ -22,7 +22,7 @@ export const metadata: Metadata = {
       href: "logo.svg",
     },
   ],
-  
+
 };
 
 export default function RootLayout({
