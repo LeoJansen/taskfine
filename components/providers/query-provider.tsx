@@ -14,5 +14,5 @@ export const QueryProvider = ({
         <QueryClientProvider client={queryClient}>
             {children}
         </QueryClientProvider>
-    )
-}
+    );
+};
