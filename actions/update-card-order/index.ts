@@ -16,7 +16,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     };
 
     const { items, listId } = data;
-    let cards;
+    let updatedCards;
 
     try {
         const transaction = items.map((card) => {
@@ -31,9 +31,12 @@ const handler = async (data: InputType): Promise<ReturnType> => {
                 },
                 data: {
                     order: card.order,
+                    listId: card.listId
                 },
             })
         });
+
+        updatedCards = await db.$transaction(transaction);
 
 
 
@@ -43,7 +46,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         }
     };
     revalidatePath(`/board/${boardId}`)
-    return { data: cards };
+    return { data: updatedCards };
 
 };
 
