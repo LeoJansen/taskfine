@@ -86,6 +86,40 @@ export const ListContainer = ({
                     card.order = i;
                 });
 
+                sourceList.cards = reorderedCards;
+                //setOrderedData(newOrderedData)
+
+
+
+
+
+
+            }
+
+            //User moves the card to another list
+            else {
+
+                //Remove card from the source list
+                const [movedCard] = sourceList.cards.splice(source.index, 1);
+
+                // Assign the new listId to the moved card
+                movedCard.listId = destination.droppableId;
+
+                //Add card to the destination list
+                destList.cards.splice(destination.index, 0, movedCard);
+
+                sourceList.cards.forEach((card, i) => {
+                    card.order = i;
+                });
+
+                //Update the order for each card in the destination list
+                destList.cards.forEach((card, i) => {
+                    card.order = i
+                });
+
+                //setOrderedData(newOrderedData)
+
+
 
 
             };
