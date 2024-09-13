@@ -15,11 +15,11 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         };
     };
 
-    const { items, listId } = data;
+    const { items, boardId } = data;
     let updatedCards;
 
     try {
-        const transaction = items.map((card) => {
+        const transaction = items.map((card) => 
             db.card.update({
                 where: {
                     id: card.id,
@@ -34,7 +34,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
                     listId: card.listId
                 },
             })
-        });
+        );
 
         updatedCards = await db.$transaction(transaction);
 
