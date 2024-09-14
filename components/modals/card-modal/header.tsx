@@ -14,12 +14,10 @@ import { toast } from "sonner";
 
 interface HeaderProps {
     data: CardWithList;
-    onClose: () => void;
 };
 
 export const Header = ({
     data,
-    onClose
 }: HeaderProps) => {
     const inputRef = useRef<ElementRef<"input">>(null);
     const [title, setTitle] = useState(data.title);
