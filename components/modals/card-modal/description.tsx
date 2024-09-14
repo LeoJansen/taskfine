@@ -37,7 +37,7 @@ export const Description = ({
     const disableEditing = () => {
         setIsEditing(false);
 
-    };
+    }; 
 
     const onKeyDown = (e: KeyboardEvent) => {
         if (e.key === "Escape") {
