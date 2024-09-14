@@ -3,8 +3,10 @@
 import { FormInput } from "@/components/form/form-input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CardWithList } from "@/types";
+import { useQueryClient } from "@tanstack/react-query";
 import { Layout } from "lucide-react";
-import { useRef, useState } from "react";
+import { useParams } from "next/navigation";
+import { ElementRef, useRef, useState } from "react";
 
 interface HeaderProps {
     data: CardWithList;
@@ -13,8 +15,10 @@ interface HeaderProps {
 export const Header = ({
     data
 }: HeaderProps) => {
-    const inputRef = useRef()
+    const inputRef = useRef<ElementRef<"input">>(null);
     const [title, setTitle] = useState(data.title);
+    const queryClient = useQueryClient();
+    const params = useParams();
 
 
     return (
