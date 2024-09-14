@@ -52,6 +52,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(({
                     required={required}
                     name={id}
                     id={id}
+                  
                     placeholder={placeholder}
                     type={type}
                     disabled={pending || disabled}
