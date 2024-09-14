@@ -12,7 +12,7 @@ export const CardModal = () => {
     const isOpen = useCardModal((state) => state.isOpen);
     const onClose = useCardModal((state) => state.onClose);
 
-    const { data: cardData} = useQuery<CardWithList>({
+    const { data: cardData } = useQuery<CardWithList>({
         queryKey: ["card", id],
         queryFn: () => fetcher(`/api/cards/${id}`),
     })
@@ -25,8 +25,7 @@ export const CardModal = () => {
         >
             <DialogContent>
                 {cardData?.title}
-                <Header data={cardData}/>
-
+                {cardData ? <Header data={cardData} /> : <Header.Skeleton />}
             </DialogContent>
 
         </Dialog>
