@@ -39,7 +39,13 @@ export const Header = ({
     };
 
     const onSubmit = (formData: FormData) => {
-        console.log(formData.get("title"));
+       const title = formData.get("title") as string;
+       const boardId = params.boardId as string;
+       execute({
+        title,
+        boardId,
+        id: data.id
+       })
     }
 
 
