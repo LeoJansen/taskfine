@@ -20,17 +20,28 @@ export const Header = ({
     const queryClient = useQueryClient();
     const params = useParams();
 
+    const onBlur = () => {
+        inputRef.current?.form?.requestSubmit();
+    };
+
+    const onSubmit = (formData: FormData) => {
+        console.log(formData.get("title"));
+    }
+
 
     return (
         <div className="flex items-center gap-x-3 mb-6 w-full">
             <Layout className="h-5 w-5 mt-1 text-neutral-700" />
             <div className="w-full">
-                <FormInput
-                    id="title"
-                    ref={inputRef}
-                    defaultValue={title}
-                    className="font-semibold text-xl px-1 text-neutral-700 bg-transparent border-transparent relative -left-1.5 w-[95%] focus-visible:bg-white focus-visible:border-input mb-0.5 truncate"
-                />
+                <form action={onSubmit}>
+                    <FormInput
+                        id="title"
+                        onBlur={onBlur}
+                        ref={inputRef}
+                        defaultValue={title}
+                        className="font-semibold text-xl px-1 text-neutral-700 bg-transparent border-transparent relative -left-1.5 w-[95%] focus-visible:bg-white focus-visible:border-input mb-0.5 truncate"
+                    />
+                </form>
 
             </div>
         </div>
