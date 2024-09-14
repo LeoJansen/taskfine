@@ -3,6 +3,7 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { CardWithList } from "@/types"
 import { AlignLeft } from "lucide-react";
+import { ElementRef, useRef, useState } from "react";
 
 interface DescriptionProps {
     data: CardWithList;
@@ -11,6 +12,13 @@ interface DescriptionProps {
 export const Description = ({
     data
 }: DescriptionProps) => {
+    const [isEditing, setIsEditing] = useState(false);
+
+    const textareaRef = useRef<ElementRef<"textarea">>(null);
+    const formRef = useRef<ElementRef<"form">>(null);
+
+
+
     return (
         <div className="flex items-start gap-x-3 w-full">
             <AlignLeft className="w-5 h-5 mt-0.5 text-neutral-700" />
