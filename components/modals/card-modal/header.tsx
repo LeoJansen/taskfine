@@ -27,10 +27,13 @@ export const Header = ({
     const params = useParams();
     const {execute} = useAction(updateCard, {
         onSuccess: (data) => {
-            toast.success("")
+            queryClient.invalidateQueries({
+                queryKey:["card", data.id]
+            });
+            toast.success(`Renamed to "${data.title}"`);
         },
         onError: (error) => {
-            toast.error(error)
+            toast.error(error);
         }
     });
 
@@ -41,6 +44,11 @@ export const Header = ({
     const onSubmit = (formData: FormData) => {
        const title = formData.get("title") as string;
        const boardId = params.boardId as string;
+
+       if (title === data.title ) {
+        return;
+       };
+       
        execute({
         title,
         boardId,
