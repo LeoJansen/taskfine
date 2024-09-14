@@ -50,10 +50,10 @@ export const Description = ({
 
     const {execute, fieldErrors} = useAction(updateCard, {
         onSuccess: (data) => {
-            toast.success("");
+            toast.success(`Card ${data.title} updated`);
+            disableEditing();
         },
         onError: (error) => {
-
             toast.error(error);
         }
         
@@ -91,6 +91,8 @@ export const Description = ({
                             className="w-full mt-2"
                             placeholder="Add a more detailed description"
                             defaultValue={data.description || undefined}
+                            ref={textareaRef}
+                            errors={fieldErrors}
                         />
                         <div className="flex items-center gap-x-2 justify-end">
                             <Button
