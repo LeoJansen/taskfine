@@ -2,8 +2,11 @@
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { CardWithList } from "@/types"
+import { useQueryClient } from "@tanstack/react-query";
 import { AlignLeft } from "lucide-react";
+import { useParams } from "next/navigation";
 import { ElementRef, useRef, useState } from "react";
+import { useEventListener } from "usehooks-ts";
 
 interface DescriptionProps {
     data: CardWithList;
@@ -16,6 +19,27 @@ export const Description = ({
 
     const textareaRef = useRef<ElementRef<"textarea">>(null);
     const formRef = useRef<ElementRef<"form">>(null);
+    const queryClient = useQueryClient();
+    const params = useParams();
+
+    const enableEditing = () => {
+        setIsEditing(true);
+        setTimeout(() => {
+            textareaRef.current?.focus();
+        },);
+    };
+    const disableEditing = () => {
+        setIsEditing(false);
+
+    };
+
+    const onKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+            disableEditing();
+        }
+    };
+
+    useEventListener("keydown", onKeyDown);
 
 
 
@@ -29,7 +53,7 @@ export const Description = ({
                 <div
                     role="button"
                     className="min-h-[78px] bg-neutral-200 text-sm font-medium py-3 px-3.5 rounded-md">
-                        {data.description || "Add a more detailed description..."}
+                    {data.description || "Add a more detailed description..."}
 
                 </div>
 
