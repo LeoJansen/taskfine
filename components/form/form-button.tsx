@@ -8,6 +8,7 @@ interface FormSubmitProps {
     disabled?: boolean;
     className?: string;
     variant?: "default" |"destructive" | "outline" | "secondary" | "ghost" | "link" ;
+    size?: "default" | "sm" | "lg" | "icon" | null | undefined;
 };
 
 export const FormSubmit = ({
@@ -15,6 +16,7 @@ export const FormSubmit = ({
     disabled,
     className,
     variant = "default",
+    size = "default"
 } : FormSubmitProps) => {
     const {pending} = useFormStatus();
 
@@ -24,6 +26,7 @@ export const FormSubmit = ({
         className={className}
         variant={variant}
         type="submit"
+        size={size}
         >
             {children}
         </Button>
