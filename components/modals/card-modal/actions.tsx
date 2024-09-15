@@ -5,11 +5,13 @@ import { deleteCard } from "@/actions/delete-card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAction } from "@/hooks/use-action";
+import { useCardModal } from "@/hooks/use-card-modal";
 import { CardWithList } from "@/types";
 import { error } from "console";
 import { Copy } from "lucide-react";
 import { useParams } from "next/navigation";
 import { toast } from "sonner";
+
 
 interface ActionsProps {
     data: CardWithList;
@@ -19,6 +21,7 @@ export const Actions = ({
     data
 }: ActionsProps) => {
     const params = useParams();
+    const cardModal = useCardModal();
     const { execute: executeCopyCard, isLoading: isLoadingCopy } = useAction(copyCard, {
         onSuccess: (data) => {
             toast.success(`Card ${data.title} copied`)
@@ -39,7 +42,8 @@ export const Actions = ({
     };
     const { execute: executeDeleteCard, isLoading: isLoadingDelete } = useAction(deleteCard, {
         onSuccess: (data) => {
-            toast.success(`Card ${data.title} deleted`)
+            toast.success(`Card ${data.title} deleted`);
+            cardModal.onClose();
 
         },
         onError: (error) => {
