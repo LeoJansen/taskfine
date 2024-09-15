@@ -1,9 +1,15 @@
 "use client"
 
+import { copyCard } from "@/actions/copy-card";
+import { deleteCard } from "@/actions/delete-card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useAction } from "@/hooks/use-action";
 import { CardWithList } from "@/types";
+import { error } from "console";
 import { Copy } from "lucide-react";
+import { useParams } from "next/navigation";
+import { toast } from "sonner";
 
 interface ActionsProps {
     data: CardWithList;
@@ -12,19 +18,57 @@ interface ActionsProps {
 export const Actions = ({
     data
 }: ActionsProps) => {
+    const params = useParams();
+    const { execute: executeCopyCard, isLoading: isLoadingCopy } = useAction(copyCard, {
+        onSuccess: (data) => {
+            toast.success(`Card ${data.title} copied`)
+
+        },
+        onError: (error) => {
+            toast.error(error)
+        }
+    });
+
+    const onCopy = () => {
+        const boardId = params.boardId as string;
+
+        executeCopyCard({
+            id: data.id,
+            boardId
+        });
+    };
+    const { execute: executeDeleteCard, isLoading: isLoadingDelete } = useAction(deleteCard, {
+        onSuccess: (data) => {
+            toast.success(`Card ${data.title} deleted`)
+
+        },
+        onError: (error) => {
+            toast.error(error)
+        }
+    });
+
+    const onDelete = () => {
+        const boardId = params.boardId as string;
+
+        executeDeleteCard({
+            id: data.id,
+            boardId
+        });
+    };
+
 
     return (
         <div className="space-y-2 mt-2">
             <p className="text-xs font-semibold">
                 Actions
             </p>
-            <Button className="" variant="alternative" size="inline">
-                <Copy className="h-4 w-4 mr-2"/>
+            <Button disabled={isLoadingCopy} onClick={onCopy} className="" variant="alternative" size="inline">
+                <Copy className="h-4 w-4 mr-2" />
                 Copy
             </Button>
-            <Button className="" variant="destructive" size="inline">
-                <Copy className="h-4 w-4 mr-2"/>
-                 Delete
+            <Button disabled={isLoadingDelete} onClick={onDelete} className="" variant="destructive" size="inline">
+                <Copy className="h-4 w-4 mr-2" />
+                Delete
             </Button>
 
 
