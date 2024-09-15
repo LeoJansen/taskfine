@@ -7,6 +7,7 @@ import { CardWithList } from "@/types";
 import { fetcher } from "@/lib/fetcher";
 import { Header } from "./card-modal/header";
 import { Description } from "./card-modal/description";
+import { Actions } from "./card-modal/actions";
 
 export const CardModal = () => {
     const id = useCardModal((state) => state.id);
@@ -25,7 +26,7 @@ export const CardModal = () => {
             onOpenChange={onClose}
         >
             <DialogContent>
-              
+
                 {cardData ? <Header data={cardData} /> : <Header.Skeleton />}
                 <div className="grid grid-cols-1 md:grid-cols-4 md:gap-4 ">
                     <div className="col-span-3">
@@ -33,6 +34,7 @@ export const CardModal = () => {
                             {cardData ? <Description data={cardData} /> : <Description.Skeleton />}
                         </div>
                     </div>
+                    {cardData ? <Actions /> : <Actions.Skeleton />}
                 </div>
             </DialogContent>
 
