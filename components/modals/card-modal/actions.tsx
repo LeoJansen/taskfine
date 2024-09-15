@@ -18,11 +18,15 @@ export const Actions = ({
             <p className="text-xs font-semibold">
                 Actions
             </p>
-            <Button className="">
-                <Copy className=""/>
+            <Button className="" variant="alternative" size="inline">
+                <Copy className="h-4 w-4 mr-2"/>
                 Copy
-
             </Button>
+            <Button className="" variant="destructive" size="inline">
+                <Copy className="h-4 w-4 mr-2"/>
+                 Delete
+            </Button>
+
 
         </div>
     );
