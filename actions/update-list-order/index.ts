@@ -6,42 +6,57 @@ import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { createSafeAction } from "@/lib/create-safe-action";
 import { UpdateListOrder } from "./schema";
+import { CreateAuditLog } from "@/lib/create-audit-log";
+import { ACTION, ENTITY_TYPE } from "@prisma/client";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
-    const {userId, orgId} = auth();
-    if(!userId || !orgId) {
+    const { userId, orgId } = auth();
+    if (!userId || !orgId) {
         return {
             error: "Unauthorized"
         };
     };
 
-    const {items, boardId} = data;
+    const { items, boardId } = data;
     let lists;
 
     try {
-        const transaction = items.map((list) => 
-        db.list.update({
-            where: {
-                id: list.id,
-                board: {
-                    orgId
+        const transaction = items.map((list) =>
+            db.list.update({
+                where: {
+                    id: list.id,
+                    board: {
+                        orgId
+                    },
                 },
-            },
-            data:{
-                order: list.order
-            },
-        }));
+                data: {
+                    order: list.order
+                },
+            })
+
+
+        );
 
         lists = await db.$transaction(transaction);
-        
-        
+
+        items.map( async (item) => {
+            await CreateAuditLog({
+                entityTitle: item.title,
+                entityId: item.id,
+                entityType: ENTITY_TYPE.LIST,
+                action: ACTION.UPDATE,
+            });
+        })
+
+
+
     } catch (error) {
         return {
             error: "Failed to reorder"
-        }   
+        }
     };
     revalidatePath(`/board/${boardId}`)
-    return { data: lists};
+    return { data: lists };
 
 };
 
