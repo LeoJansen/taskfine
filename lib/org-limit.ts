@@ -6,7 +6,7 @@ export const incrementAvailableCount = async () => {
     const {orgId} = auth();
 
     if(!orgId) {
-        return;
+       throw new Error("Unauthorized")
     };
 
     const orgLimit = await db.orgLimit.findUnique({
