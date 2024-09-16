@@ -4,13 +4,9 @@ import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
-interface ActivityListProps {
-    data: any;
-}
 
-export const ActivityList = async ({
-    data
-}: ActivityListProps) => {
+
+export const ActivityList = async () => {
     const { orgId } = auth();
 
     if (!orgId) {
@@ -21,6 +17,9 @@ export const ActivityList = async ({
         where: {
             orgId,
         },
+        orderBy: {
+            createdAt: 'desc'
+        }
     });
 
     return (
@@ -36,7 +35,7 @@ export const ActivityList = async ({
 };
 
 ActivityList.Skeleton = function ActivityListSkeleton() {
-    
+
     return (
         <ol className="space-y-4 mt-4">
             <Skeleton className="w-[80%] h-14" />
@@ -45,5 +44,5 @@ ActivityList.Skeleton = function ActivityListSkeleton() {
             <Skeleton className="w-[80%] h-14" />
             <Skeleton className="w-[75%] h-14" />
         </ol>
-    )
-}
+    );
+};
