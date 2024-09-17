@@ -1,26 +1,34 @@
 "use client"
 
 import { useProModal } from "@/hooks/use-pro-modal"
-import { Dialog,  DialogContent, DialogClose, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogClose, DialogTrigger } from "@/components/ui/dialog";
 import { } from "@radix-ui/react-dialog";
 import Image from "next/image";
 import { Button } from "../ui/button";
+import { useAction } from "@/hooks/use-action";
+import { stripeRedirect } from "@/actions/stripe-redirect";
 
 export const ProModal = () => {
     const proModal = useProModal();
 
+    const { execute, isLoading } = useAction(stripeRedirect, {
+        onSuccess: (data) => {
+
+        }
+    })
+
     return (
         <Dialog
-        open={proModal.isOpen}
-        onOpenChange={proModal.onClose}
+            open={proModal.isOpen}
+            onOpenChange={proModal.onClose}
         >
             <DialogContent className="max-w-md p-0 overflow-hidden">
                 <div className="aspect-video relative flex items-center justify-center">
                     <Image
-                    src="/hero.svg"
-                    alt="Hero"
-                    className="object-cover bottom-0 object-top"
-                    fill
+                        src="/hero.svg"
+                        alt="Hero"
+                        className="object-cover bottom-0 object-top"
+                        fill
                     />
                 </div>
                 <div className="text-neutral-700 mx-auto space-y-6 p-6">
@@ -39,7 +47,7 @@ export const ProModal = () => {
                         </ul>
                     </div>
                     <Button className="w-full"
-                    variant="default">
+                        variant="default">
                         Upgrade
                     </Button>
                 </div>
