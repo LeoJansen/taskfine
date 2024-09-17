@@ -24,10 +24,14 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     let url = ""
 
     try {
-        const orgSubscription = await db.
-        
+        const orgSubscription = await db.orgSubscription.findUnique({
+            where: {
+                orgId,
+            },
+        });
+
     } catch (error) {
-        
+
     }
 
 
