@@ -15,7 +15,16 @@ export const checkSubscription = async () => {
     };
 
     const orgSubscription = await db.orgSubscription.findUnique({
-        
+        where: {
+            orgId,
+        },
+        select: {
+            stripeSubscriptionId: true,
+            stripeCurrentPeriodEnd: true,
+            stripeCustomerId: true,
+            stripePriceId: true
+
+        }
     })
 
 }
