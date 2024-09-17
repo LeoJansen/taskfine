@@ -17,6 +17,7 @@ import { toast } from 'sonner';
 import { FormPicker } from './form-picker';
 import { ElementRef, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { ProModal } from '../modals/pro-modal';
 
 interface FormPopoverProps {
     children: React.ReactNode;
@@ -37,15 +38,13 @@ export const FormPopover = ({
 
     const { execute, fieldErrors } = useAction(createBoard, {
         onSuccess: (data) => {
-            console.log({ data });
-            toast.success("Board created", );
+            toast.success("Board created",);
             closeRef.current?.click();
             router.push(`/board/${data.id}`)
         },
         onError: (error) => {
-            console.log({ error });
-            toast.error(error, 
-              )
+            toast.error(error);
+            ProModal.onOpen()
         }
     })
 
@@ -82,8 +81,8 @@ export const FormPopover = ({
                     className='space-y-4'>
                     <div className='space-y-4'>
                         <FormPicker
-                        id="image"
-                        errors={fieldErrors}
+                            id="image"
+                            errors={fieldErrors}
                         />
                         <FormInput
                             id="title"
