@@ -1,8 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { CardModal } from "@/components/modals/card-modal";
+
 import { ProModal } from "@/components/modals/pro-modal";
+import { CardModal } from "@/components/modals/card-modal";
 
 
 export const ModalProvider = () => {
@@ -19,6 +20,7 @@ export const ModalProvider = () => {
     return (
         <>
             <CardModal />
+            <ProModal/>
         </>
     )
 
