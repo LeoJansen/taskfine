@@ -33,4 +33,6 @@ export const checkSubscription = async () => {
 
     const isValid = orgSubscription && orgSubscription.stripeCurrentPeriodEnd?.getTime()! + DAY_IN_MS > Date.now();
 
+    return !!isValid
+
 }
