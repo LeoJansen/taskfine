@@ -6,7 +6,7 @@ type ProModalStore = {
     onClose: () => void;
 };
 
-export const useCardModal = create<ProModalStore>(set => ({
+export const useProModal = create<ProModalStore>(set => ({
     id: undefined,
     isOpen: false,
     onOpen: () => set({ isOpen: true }),
