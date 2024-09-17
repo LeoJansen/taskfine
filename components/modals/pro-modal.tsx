@@ -18,7 +18,7 @@ export const ProModal = () => {
                     <Image
                     src="/hero.svg"
                     alt="Hero"
-                    className="object-cover bottom-0"
+                    className="object-cover bottom-0 object-top"
                     fill
                     />
                 </div>
@@ -26,10 +26,17 @@ export const ProModal = () => {
                     <h2 className="font-semibold text-xl">
                         Upgrade to Taskfine Pro Today
                     </h2>
-                    <p className="text-xs font-semibold text-neutral-600">
+                    <p className="text-base font-semibold text-neutral-600">
                         Explore the best of Taskfine
                     </p>
-
+                    <div className="pl-3">
+                        <ul className="text-sm list-disc">
+                            <li>Unlimited Boards</li>
+                            <li>Advanced Checklists</li>
+                            <li>Admin and security features</li>
+                            <li>And more!</li>
+                        </ul>
+                    </div>
                 </div>
 
             </DialogContent>
