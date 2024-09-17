@@ -2,26 +2,34 @@
 
 import { useProModal } from "@/hooks/use-pro-modal"
 import { Dialog, DialogContent, DialogClose, DialogTrigger } from "@/components/ui/dialog";
-import { } from "@radix-ui/react-dialog";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { useAction } from "@/hooks/use-action";
 import { stripeRedirect } from "@/actions/stripe-redirect";
+import { toast } from "sonner";
 
 export const ProModal = () => {
     const proModal = useProModal();
 
     const { execute, isLoading } = useAction(stripeRedirect, {
         onSuccess: (data) => {
-
+            window.location.href = data;
+        },
+        onError: (error) => {
+            toast.error(error);
         }
-    })
+    });
+
+    const onClick = () => {
+        execute({});
+    };
 
     return (
         <Dialog
             open={proModal.isOpen}
             onOpenChange={proModal.onClose}
         >
+            
             <DialogContent className="max-w-md p-0 overflow-hidden">
                 <div className="aspect-video relative flex items-center justify-center">
                     <Image
@@ -46,12 +54,16 @@ export const ProModal = () => {
                             <li>And more!</li>
                         </ul>
                     </div>
-                    <Button className="w-full"
-                        variant="default">
+                    <Button 
+                    disabled={isLoading}
+                    onClick={onClick}
+                    className="w-full"
+                        variant="default"
+                        >
                         Upgrade
                     </Button>
                 </div>
             </DialogContent>
         </Dialog>
-    )
-}
+    );
+};
