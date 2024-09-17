@@ -24,7 +24,13 @@ export const checkSubscription = async () => {
             stripeCustomerId: true,
             stripePriceId: true
 
-        }
-    })
+        },
+    });
+
+    if(!orgSubscription){
+        return false;
+    };
+
+    const isValid = orgSubscription && orgSubscription.stripeCurrentPeriodEnd?.getTime()! + DAY_IN_MS > Date.now();
 
 }
