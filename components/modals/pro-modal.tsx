@@ -4,6 +4,7 @@ import { useProModal } from "@/hooks/use-pro-modal"
 import { Dialog,  DialogContent, DialogClose, DialogTrigger } from "@/components/ui/dialog";
 import { } from "@radix-ui/react-dialog";
 import Image from "next/image";
+import { Button } from "../ui/button";
 
 export const ProModal = () => {
     const proModal = useProModal();
@@ -37,10 +38,12 @@ export const ProModal = () => {
                             <li>And more!</li>
                         </ul>
                     </div>
+                    <Button className="w-full"
+                    variant="default">
+                        Upgrade
+                    </Button>
                 </div>
-
             </DialogContent>
-
         </Dialog>
     )
 }
