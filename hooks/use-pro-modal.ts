@@ -7,8 +7,8 @@ type ProModalStore = {
 };
 
 export const useProModal = create<ProModalStore>(set => ({
-    id: undefined,
-    isOpen: false,
+ 
+    isOpen: true,
     onOpen: () => set({ isOpen: true }),
     onClose: () => set({ isOpen: false })
 }))

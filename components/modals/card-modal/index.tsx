@@ -1,15 +1,18 @@
 "use client"
 
 import { useCardModal } from "@/hooks/use-card-modal";
-import { Dialog, DialogContent } from "../ui/dialog";
+
 import { useQuery } from "@tanstack/react-query";
 import { CardWithList } from "@/types";
 import { fetcher } from "@/lib/fetcher";
-import { Header } from "./card-modal/header";
-import { Description } from "./card-modal/description";
-import { Actions } from "./card-modal/actions";
+
 import { AuditLog } from "@prisma/client";
-import { Activity } from "./card-modal/activity";
+import { Dialog, DialogContent } from "@radix-ui/react-dialog";
+import { Header } from "./header";
+import { Description } from "./description";
+import { Activity } from "./activity";
+import { Actions } from "./actions";
+
 
 export const CardModal = () => {
     const id = useCardModal((state) => state.id);
