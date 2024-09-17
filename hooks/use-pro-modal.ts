@@ -9,6 +9,6 @@ type ProModalStore = {
 export const useCardModal = create<ProModalStore>(set => ({
     id: undefined,
     isOpen: false,
-    onOpen: (id: string) => set({ isOpen: true, id }),
-    onClose: () => set({ isOpen: false, id: undefined })
+    onOpen: () => set({ isOpen: true,  }),
+    onClose: () => set({ isOpen: false, })
 }))
