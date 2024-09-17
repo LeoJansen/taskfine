@@ -56,22 +56,34 @@ const handler = async (data: InputType): Promise<ReturnType> => {
                                 name: "Taskifine Pro",
                                 description: "Unilimited boards for your organization."
                             },
+                            unit_amount: 2000,
+                            recurring: {
+                                interval: "month"
+                            },
                         },
+                        quantity: 1,
                     },
                 ],
+                metadata: {
+                    orgId,
+                },
             });
 
-          
+            url= stripeSession.url || "";
+
+
         }
 
     } catch (error) {
 
-    }
+        return {
+            error: "Something went wrong!"
+        };
 
+    };
 
-
-
-
+    revalidatePath(`/organization/${orgId}`);
+    return {data: url};
 
 };
 
