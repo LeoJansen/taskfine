@@ -56,7 +56,7 @@ export const ListContainer = ({
     const onDragEnd = (result: any) => {
         const { destination, source, type } = result;
 
-        console.log({ destination, source, type })
+       
 
         if (!destination) {
             return;
