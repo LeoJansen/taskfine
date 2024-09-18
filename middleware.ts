@@ -28,8 +28,6 @@ export default clerkMiddleware(
     }
 
     if (!isPublicRoute(req)) {
-      if (!userId)
-        auth().redirectToSignIn({ returnBackUrl: req.url });
 
       if (userId && !orgId && pathName !== pathSelectOrg)
         return NextResponse.redirect(new URL(pathSelectOrg, req.url));
