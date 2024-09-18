@@ -4,7 +4,7 @@ import { db } from "./db";
 
 
 
-const DAY_IN_MS = 84_400_000;
+const DAY_IN_MS = 86_400_000;
 
 
 export const checkSubscription = async () => {
