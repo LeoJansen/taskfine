@@ -1,5 +1,5 @@
 import { Footer } from "./_components/footer";
-import { Navbar } from "@/app/(marketing)/_components/navbar";
+import { MarketingNavbar } from "@/app/(marketing)/_components/navbar";
 
 
 
@@ -10,7 +10,7 @@ export default function MarketingLayout({
 }>) {
     return (
         <div className="h-full bg-slate-100">
-            <Navbar />
+            <MarketingNavbar />
             <main className="pt-40 pb-20 ">
                 {children}
             </main>
