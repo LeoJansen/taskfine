@@ -12,7 +12,7 @@ interface BoardOptionsProps {
     id: string;
 }
 
-export const BoardOptions = ({ id }) => {
+export const BoardOptions = ({ id }: BoardOptionsProps) => {
     const { execute, isLoading } = useAction(deleteBoard, {
         onError: (error) => {
             toast.error(error)
