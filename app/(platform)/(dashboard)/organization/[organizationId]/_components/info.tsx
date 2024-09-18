@@ -38,7 +38,7 @@ export const Info = ({
 
                 <div className="flex items-center text-xs text-muted-foreground">
                     <CreditCard className="h-3 w-3 mr-1" />
-                    Free
+                    {isPro ? "Pro" : "Free"}
                 </div>
             </div>
         </div>
