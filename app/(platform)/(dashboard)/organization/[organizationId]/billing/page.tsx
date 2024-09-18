@@ -3,13 +3,8 @@ import { Info } from "../_components/info";
 import { Separator } from "@/components/ui/separator";
 import { SubscriptionButton } from "./_components/subscription-button";
 
-interface BillingPageProps {
-    data: any;
-}
 
-const BillingPage = async ({
-    data
-}: BillingPageProps) => {
+const BillingPage = async () => {
     const isPro = await checkSubscription();
 
     return (
