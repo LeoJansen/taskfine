@@ -7,11 +7,12 @@ import { CardWithList } from "@/types";
 import { fetcher } from "@/lib/fetcher";
 
 import { AuditLog } from "@prisma/client";
-import { Dialog, DialogContent } from "@radix-ui/react-dialog";
+
 import { Header } from "./header";
 import { Description } from "./description";
 import { Activity } from "./activity";
 import { Actions } from "./actions";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 
 export const CardModal = () => {
@@ -34,11 +35,12 @@ export const CardModal = () => {
         <Dialog
             open={isOpen}
             onOpenChange={onClose}
+        
         >
             <DialogContent>
 
                 {cardData ? <Header data={cardData} /> : <Header.Skeleton />}
-                <div className="grid grid-cols-1 md:grid-cols-4 md:gap-4 ">
+                <div className="mt-44 grid grid-cols-1 md:grid-cols-4 md:gap-4 z-80">
                     <div className="col-span-3">
                         <div className="w-full space-y-6">
                             {cardData ? <Description data={cardData} /> : <Description.Skeleton />}
