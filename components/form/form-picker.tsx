@@ -64,16 +64,16 @@ export const FormPicker = ({
 
     return (
         <div className="relative">
-            <div className="grid grid-cols-3 gap-2 mb-2">
+            <div className="grid grid-cols-3 gap-2">
                 {images.map((image, i) => (
                     <div
                         key={i}
-                        className={cn("cursor-pointer relative aspect-video group hover:opacity-75 transition bg-muted", pending && "opacity-50 hover:opacity-50 cursor-auto")}
+                        className={cn("cursor-pointer relative aspect-video group hover:opacity-75 transition bg-muted ", pending && "opacity-50 hover:opacity-50 cursor-auto")}
                         onClick={() => {
                             if (pending) return;
                             setSelectedImageId(image.id);
                         }}
-                    >
+                    > 
                         <input
                             type="radio"
                             id={id}
@@ -97,7 +97,7 @@ export const FormPicker = ({
                         )}
                         <Link href={image.links.html}
                             target="_blank"
-                            className="opacity-0 group-hover:opacity-100 absolute bottom-0 w-full text-[10px] truncate text-white hover:underline p-1 bg-black/10"
+                            className="opacity-0 group-hover:opacity-100 absolute bottom-0 w-full text-[8px] md:text-[10px] truncate text-white hover:underline m-[0.15px] bg-black/10"
                         >
                             {image.user.name}
 
